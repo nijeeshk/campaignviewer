@@ -1,0 +1,12 @@
+version: '3'
+services:
+  campaignviewer:
+    container_name: campaignviewer
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/data
+    command: yarn run dev:start
+    ports:
+      - 8080:8080

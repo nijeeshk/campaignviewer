@@ -1,0 +1,25 @@
+@import './variables';
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato/Lato-Regular.ttf');
+}
+
+* {
+  outline: none !important;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: $font-size;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  color: $font-color;
+  height: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: #f3f4f5;
+}
