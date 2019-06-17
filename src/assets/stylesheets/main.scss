@@ -1,8 +1,8 @@
 @import './variables';
 
 @font-face {
-  font-family: 'Lato';
-  src: url('../fonts/Lato/Lato-Regular.ttf');
+  font-family: 'Nunito';
+  src: url('../fonts/Nunito/Nunito-Regular.ttf');
 }
 
 * {
@@ -10,16 +10,18 @@
   box-sizing: border-box;
 }
 
-html {
-  font-size: $font-size;
-}
-
 body {
-  font-family: "Lato", sans-serif;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.5;
   color: $font-color;
   height: 100%;
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  background-color: #f3f4f5;
+  background-color: #f2f2f2;
+}
+
+.DateRangePicker_picker__portal {
+  z-index: 150;
 }

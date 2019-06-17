@@ -1,9 +1,30 @@
+.search {
+  position: relative;
+
+  label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    cursor: text;
+
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
+
 .inputStyles {
   width: 100%;
   height: 40px;
   padding: 0 1rem;
+  padding-left: 40px;
   border: 1px solid #d9d9d9;
   transition: border-color .2s;
+  font-size: inherit;
 
   &:focus {
     border-color: #6c7ae0;

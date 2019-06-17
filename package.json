@@ -7,21 +7,34 @@
   "author": "Nijeesh <k.nijeesh91@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "node scripts/build.js",
-    "dev:start": "webpack-dev-server --config webpack/dev.config.js --colors"
+    "build": "webpack --config webpack/prod.config.js --colors",
+    "dev:start": "webpack-dev-server --config webpack/dev.config.js --colors",
+    "test": "jest"
   },
   "dependencies": {
+    "moment": "^2.24.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dates": "^20.2.2",
+    "react-dom": "^16.8.6",
+    "react-paginate": "^6.3.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "autoprefixer": "^9.6.0",
     "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.0.3",
     "css-loader": "^3.0.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-loader": "^2.1.2",
@@ -30,23 +43,27 @@
     "eslint-plugin-react": "^7.13.0",
     "file-loader": "^4.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.8.0",
     "mini-css-extract-plugin": "^0.7.0",
-    "moment": "^2.24.0",
     "node-sass": "^4.12.0",
     "postcss-loader": "^3.0.0",
-    "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dates": "^20.2.2",
-    "react-dom": "^16.8.6",
-    "react-paginate": "^6.3.0",
+    "react-test-renderer": "^16.8.6",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
-    "uuid": "^3.3.2",
     "webpack": "^4.34.0",
     "webpack-cli": "^3.3.4",
     "webpack-dev-server": "^3.7.1",
     "webpack-node-externals": "^1.7.2",
     "yargs": "^13.2.4"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./src/test/setupTests.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|scss)$": "identity-obj-proxy"
+    }
   },
   "browserslist": [
     "> 1%",

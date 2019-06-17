@@ -1,8 +1,13 @@
 import React from 'react';
-import { inputStyles } from './Input.module.scss';
+import styles from './Input.module.scss';
 
 const Input = props => (
-  <input className={inputStyles} {...props} />
+  <div className={styles.search}>
+    <label htmlFor="searchInput">
+      <img src="/media/images/search.png" alt="" />
+    </label>
+    <input id="searchInput" className={styles.inputStyles} {...props} />
+  </div>
 );
 
 export default Input;

@@ -21,6 +21,7 @@ class Toast extends PureComponent {
   componentDidUpdate(prevProps) {
     const { id } = this.props;
     if (prevProps.id !== id) {
+      // console.log('hereee');
       this.setState({ show: false }, () => {
         setTimeout(() => {
           this.setState({

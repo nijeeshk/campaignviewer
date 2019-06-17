@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -9,7 +11,7 @@ const autoprefixer = require('autoprefixer');
 const srcPath = path.resolve(__dirname, '..', 'src');
 const distPath = path.resolve(__dirname, '..', 'dist');
 
-module.exports = () => ({
+module.exports = {
   mode: 'production',
   target: 'web',
   entry: path.resolve(srcPath, 'js', 'index.jsx'),
@@ -145,7 +147,7 @@ module.exports = () => ({
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: `${srcPath}/templates/index.html.template`,
-      title: 'Lens: Smarter, Faster, Better decisions',
+      title: 'Campaign Viewer',
     }),
   ],
-});
+};

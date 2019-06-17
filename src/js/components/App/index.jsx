@@ -13,6 +13,7 @@ import Input from '../../widgets/Input';
 import Toast from '../../widgets/Toast';
 import Table from '../../widgets/Table';
 import processCampaigns from '../../utils/processCampaigns';
+import filterCampaigns from '../../utils/filterCampaigns';
 import 'react-dates/lib/css/_datepicker.css';
 import 'react-dates/initialize';
 import styles from './App.module.scss';
@@ -20,6 +21,7 @@ import styles from './App.module.scss';
 class App extends Component {
   static defaultProps = {
     campaigns: [],
+    filteredCampaigns: [],
     startDate: null,
     endDate: null,
     focusedInput: null,
@@ -28,10 +30,20 @@ class App extends Component {
       id: '',
       text: '',
     },
+    search: '',
   };
 
   static propTypes = {
     campaigns: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        startDate: PropTypes.string.isRequired,
+        endDate: PropTypes.string.isRequired,
+        Budget: PropTypes.number.isRequired,
+      }),
+    ).isRequired,
+    filteredCampaigns: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
@@ -48,18 +60,23 @@ class App extends Component {
       id: PropTypes.string,
       text: PropTypes.string,
     }),
+    search: PropTypes.string,
   };
 
   state = {
     campaigns: this.props.campaigns,
+    filteredCampaigns: this.props.filteredCampaigns,
     startDate: this.props.startDate,
     endDate: this.props.endDate,
     focusedInput: this.props.focusedInput,
     pageWidth: this.props.pageWidth,
     toast: this.props.toast,
+    search: this.props.search,
   };
 
   resizeHandle = null;
+
+  searchHandle = null;
 
   componentDidMount() {
     window.AddCampaigns = this.addCampaigns;
@@ -86,9 +103,14 @@ class App extends Component {
     const { list, failed } = processCampaigns(campaigns);
     const toastText = `Add Campaigns: ${list.length} success. ${failed.length} failed`;
     this.setState({
+      ...App.defaultProps,
       campaigns: [
-        ...this.state.campaigns,
         ...list,
+        ...this.state.campaigns,
+      ],
+      filteredCampaigns: [
+        ...list,
+        ...this.state.campaigns,
       ],
       toast: {
         id: uuidV4(),
@@ -101,6 +123,8 @@ class App extends Component {
     this.setState({
       startDate,
       endDate,
+    }, () => {
+      this.handleSearch();
     });
   }
 
@@ -125,14 +149,48 @@ class App extends Component {
     return false;
   }
 
+  onSearchTextChange = (evt) => {
+    this.setState({
+      search: evt.target.value,
+    }, () => {
+      this.handleSearch();
+    });
+  }
+
+  handleSearch = () => {
+    const {
+      search,
+      campaigns,
+      startDate,
+      endDate,
+    } = this.state;
+    if (this.searchHandle) {
+      clearTimeout(this.searchHandle);
+    }
+    this.searchHandle = setTimeout(() => {
+      const filteredCampaigns = filterCampaigns({
+        campaigns,
+        search,
+        startDate: moment(startDate).isValid()
+          ? moment(startDate).format('MM/DD/YYYY') : '',
+        endDate: moment(endDate).isValid()
+          ? moment(endDate).format('MM/DD/YYYY') : '',
+      });
+      this.setState({
+        filteredCampaigns,
+      });
+    }, 500);
+  }
+
   render() {
     const {
-      campaigns,
+      filteredCampaigns,
       startDate,
       endDate,
       focusedInput,
       pageWidth,
       toast,
+      search,
     } = this.state;
     const showFullscreenCalendar = pageWidth < 768;
     return (
@@ -151,7 +209,7 @@ class App extends Component {
                   onDatesChange={this.onDatesChange}
                   onFocusChange={this.onFocusChange}
                   enableOutsideDays={false}
-                  displayFormat="DD/MM/YYYY"
+                  displayFormat="MM/DD/YYYY"
                   isOutsideRange={this.isOutsideRange}
                   numberOfMonths={showFullscreenCalendar ? 1 : 2}
                   withFullScreenPortal={showFullscreenCalendar}
@@ -165,12 +223,17 @@ class App extends Component {
               </div>
               <div className={styles.right}>
                 <Input
+                  id="searchInput"
                   placeholder="Search by Name"
+                  value={search}
+                  onChange={this.onSearchTextChange}
                 />
               </div>
             </PanelHeader>
             <PanelBody>
-              <Table data={campaigns} />
+              <div id="results">
+                <Table data={filteredCampaigns} />
+              </div>
             </PanelBody>
           </Panel>
         </div>

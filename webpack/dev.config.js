@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -148,7 +150,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: `${srcPath}/templates/index.html.template`,
-      title: 'Lens: Smarter, Faster, Better decisions',
+      title: 'Campaign Viewer',
     }),
   ],
 };
