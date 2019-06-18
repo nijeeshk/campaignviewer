@@ -21,10 +21,6 @@ This will install the dev dependencies as well as the project dependencies.
 
 ## Run code in dev mode and watch for changes (development)
 
-`docker run --rm -v $(pwd):/data -it campaignviewer yarn run dev:start`
-
-If docker-compose is installed, you can also do
-
 `docker-compose up`
 
 This will run files and then watch for changes.
