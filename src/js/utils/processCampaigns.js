@@ -8,7 +8,8 @@ const processCampaigns = (campaigns) => {
     && Object.prototype.hasOwnProperty.call(campaign, 'name')
     && Object.prototype.hasOwnProperty.call(campaign, 'startDate')
     && Object.prototype.hasOwnProperty.call(campaign, 'endDate')
-    && Object.prototype.hasOwnProperty.call(campaign, 'Budget')) {
+    && Object.prototype.hasOwnProperty.call(campaign, 'Budget')
+    && campaign.startDate <= campaign.endDate) {
       return results.list.push(campaign);
     }
     return results.failed.push(campaign);

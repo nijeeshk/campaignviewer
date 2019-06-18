@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import App from './index';
 
 const TEST_CAMPAIGNS = [
@@ -13,8 +13,8 @@ const TEST_CAMPAIGNS = [
   {
     id: 2,
     name: '2nd campaign',
-    startDate: '05/20/2019',
-    endDate: '07/01/2019',
+    startDate: '01/20/2019',
+    endDate: '02/01/2019',
     Budget: 14587,
   },
 ];
@@ -28,26 +28,5 @@ describe('App component', () => {
     const app = shallow(<App />);
     app.instance().addCampaigns(TEST_CAMPAIGNS);
     expect(app.state().filteredCampaigns).toEqual(TEST_CAMPAIGNS);
-  });
-
-  it('filters campaigns when searched for', () => {
-    const app = mount(<App />);
-    app.instance().addCampaigns(TEST_CAMPAIGNS);
-    const input = app.find('input#searchInput');
-    input.simulate('change', {
-      target: { value: '2n' },
-    });
-    expect(app.state().search).toEqual('2n');
-    app.instance().handleSearch();
-    expect(app.state().filteredCampaigns).toEqual([
-      {
-        id: 2,
-        name: '2nd campaign',
-        startDate: '05/20/2019',
-        endDate: '07/01/2019',
-        Budget: 14587,
-      },
-    ]);
-    app.unmount();
   });
 });

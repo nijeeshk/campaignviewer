@@ -1,4 +1,7 @@
 const nFormatter = (num, digits) => {
+  if (!num) {
+    return '';
+  }
   const si = [
     { value: 1, symbol: '' },
     { value: 1E3, symbol: 'k' },
