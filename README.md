@@ -23,7 +23,8 @@ This will install the dev dependencies as well as the project dependencies.
 
 `docker-compose up`
 
-This will run files and then watch for changes.
+This will run code and then watch for changes.
+Open http://localhost:8080 in browser to view result.
 
 ## Building the files (production)
 
