@@ -49,6 +49,7 @@ describe('App component', () => {
         Budget: 14587,
       },
     ]);
+    expect(app).toMatchSnapshot();
     app.unmount();
   });
 
@@ -69,6 +70,7 @@ describe('App component', () => {
         Budget: 14587,
       },
     ]);
+    expect(app).toMatchSnapshot();
     app.unmount();
   });
 });
