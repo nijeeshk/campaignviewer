@@ -1,6 +1,7 @@
 node_modules
 *.iml
 dist
+build
 .DS_Store
 npm-debug.log
 .sass-cache
