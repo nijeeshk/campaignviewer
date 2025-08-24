@@ -9,6 +9,7 @@
   "scripts": {
     "build": "webpack --config webpack/prod.config.js --colors",
     "dev:start": "webpack-dev-server --config webpack/dev.config.js --colors",
+    "test:dev": "jest --watch",
     "test": "jest"
   },
   "dependencies": {
